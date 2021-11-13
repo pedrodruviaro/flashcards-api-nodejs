@@ -25,6 +25,10 @@
         /auth/login
         BODY: email, password
 
+        VERIFY TOKEN - GET
+        /auth/token
+        HEADERS: authorization Bearer
+
 ## **Collections** 🗃️
 
         CREATE - POST
