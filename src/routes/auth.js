@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const AuthController = require("../controllers/AuthController");
+const tokenValidation = require("../services/tokenValidation");
 
 /*
     POST => /api/auth/register
@@ -12,5 +13,10 @@ router.post("/register", AuthController.register);
     BODY => email, password
 */
 router.post("/login", AuthController.login);
+
+/*
+    GET => /api/auth/token
+*/
+router.get("/token", tokenValidation, AuthController.verifyToken);
 
 module.exports = router;

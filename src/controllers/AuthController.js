@@ -81,9 +81,21 @@ class AuthController {
             );
 
             const { name } = user.dataValues;
-            return res.status(200).json({ token, name });
+            return res.status(200).json({ ok: true, token, name });
         } catch (err) {
             return res.status(500).json({ error: err });
+        }
+    }
+
+    async verifyToken(req, res) {
+        const { userId } = req.user;
+
+        try {
+            const user = await User.findByPk(userId);
+            const { password, ...rest } = user.dataValues;
+            return res.status(200).json({ ...rest });
+        } catch (err) {
+            return res.status(500).json({ error });
         }
     }
 }
